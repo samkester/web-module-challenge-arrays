@@ -206,12 +206,25 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/){
+console.log("-- stretch 1 --");
 
-    /*code here*/
+const getAverageWordLength = (flavors) => {
+    let totalWords = flavors.length; // each flavor is at least one word
+    for(let i = 0; i < flavors.length; i++)
+    {
+        for(let j = 0; j < flavors[i].length; j++)
+        {
+            if(flavors[i][j] === " ") // finds spaces, which we assume separate words
+            {                         // in real code this would be a regular expression of some kind that's less brittle (e.g., won't break on "Chocolate " or "Banana  Split")
+                totalWords++;
+            }
+        }
+    }
 
+    return totalWords /= flavors.length;
 }
 
+console.log(getAverageWordLength(originalFlavors));
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
 
@@ -220,6 +233,8 @@ Your function should accept 4 different arrays,
 and should return a new array called randomFlavors with a length 31.
 
 forExample, getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors) might return ["Strawberry Cheesecake", "Eggnog,"..."Chocolate"].*/
+
+console.log("-- stretch 2 --");
 
 // Data ⬇️
 var newFlavors = ["Date night",
@@ -294,8 +309,32 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
-
-    /*code here*/
-
+const getRandomFlavors = (count, ...sources) => {
+    let concatSources = [];
+    for(let i = 0; i < sources.length; i++) // merge all of the "sources" arrays into one array
+    {
+        concatSources = concatSources.concat(sources[i]);
+    }
+    //console.log(concatSources);
+    let randomFlavors = [];
+    while(randomFlavors.length < count) // because we're error checking (for duplicates) we don't know how many iterations it will take to fill this list
+    {
+        let flavor = concatSources.splice(Math.floor(Math.random() * concatSources.length), 1)[0]; // note to self: if you leave the parenthesis off random(), floor will always return 0. Unhelpful.
+        //                                choose a random number between 0 and length - 1
+        //           remove the flavor at that index from concatSources
+        //console.log(flavor);
+        if(!randomFlavors.includes(flavor))
+        {
+            // only add flavors if they're not already on the list
+            randomFlavors.push(flavor);
+        }
+        if(concatSources.length == 0)
+        {
+            break; // if by some chance we run out of items in concatSources, just take what we have
+        }
+    }
+    //console.log(randomFlavors);
+    return randomFlavors;
 }
+
+console.log(getRandomFlavors(32, originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
