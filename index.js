@@ -46,6 +46,8 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
+console.log("-- task 1 --");
+
 is31Flavors = flavors => flavors.length === 31;
 
 console.log(is31Flavors(originalFlavors));
@@ -62,6 +64,8 @@ Your function should add the flavor to the front of the array and console.log th
 
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */ 
 
+console.log("-- task 2 --");
+
 addFlavor = (flavors, newFlavor) => { flavors.unshift(newFlavor); console.log(flavors); }
 
 addFlavor(originalFlavors, "Rainbow Sherbert");
@@ -76,6 +80,8 @@ Your function should remove a flavor from the end of the array and console.log t
 
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/ 
 
+console.log("-- task 3 --");
+
 removeLastFlavor = (flavors) => { flavors.pop(); console.log(flavors); }
 
 removeLastFlavor(originalFlavors);
@@ -88,6 +94,8 @@ Your function should accept:
 (2) an index
 
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
+
+console.log("-- task 4 --");
 
 getFlavorByIndex = (flavors, index) => flavors[index];
 
@@ -105,6 +113,8 @@ For example, removeFlavorByName(originalFlavors, "Vanilla") would return an arra
 Hint: You can use .splice() for this
 
 */
+
+console.log("-- task 5 --");
 
 removeFlavorByName = (flavors, removedFlavor) => {
     for(let i = 0; i < flavors.length; i++)
@@ -136,14 +146,19 @@ and should return a new array that is identical to the old array. You can name t
 
 console.log("-- task 6 --");
 
-let modifiedFlavors = [];
+/*let copy = (oldFlavors, newFlavors) => { newFlavors = [...oldFlavors]; console.log(newFlavors); }*/
+function copy(oldFlavors, newFlavors){
+    newFlavors = [...oldFlavors];
+    //console.log(newFlavors);
+    return newFlavors;
+}
 
-copy = (oldFlavors, newFlavors) => { newFlavors = [...oldFlavors]; console.log(newFlavors); }
+let modified = [];
 
-console.log(modifiedFlavors);
-console.log("before copy function");
-copy(originalFlavors, modifiedFlavors);
-console.log("outside of copy function");
+/*console.log(modifiedFlavors);*/
+//console.log("before copy function");
+let modifiedFlavors = copy(originalFlavors, modified);
+//console.log("outside of copy function");
 console.log(modifiedFlavors);
 
 addFlavor(originalFlavors, "Chocolate Almond");
@@ -163,7 +178,9 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-filterByWord = (flavors, word) => {
+console.log("-- task 7 --");
+
+let filterByWord = (flavors, word) => {
     let filteredList = [];
     for(let i = 0; i < flavors.length; i++)
     {
